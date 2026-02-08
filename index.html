@@ -6,7 +6,7 @@
   <title>For You — Valentine</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400&family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --rose: #c45c6a;
@@ -187,6 +187,144 @@
       opacity: 0;
       animation: fadeIn 0.8s ease 2.2s forwards;
     }
+
+    /* Hindi section */
+    .hindi-section {
+      margin-top: 2.5rem;
+      padding: 1.75rem 1.25rem;
+      background: linear-gradient(135deg, rgba(196, 92, 106, 0.15) 0%, rgba(201, 169, 89, 0.1) 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(196, 92, 106, 0.3);
+    }
+    .hindi-section h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      text-align: center;
+      letter-spacing: 0.1em;
+    }
+    .hindi-line {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--cream);
+      text-align: center;
+      line-height: 1.8;
+      margin-bottom: 0.5rem;
+    }
+    .hindi-meaning {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      color: rgba(253, 248, 245, 0.8);
+      text-align: center;
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+    .hindi-line:last-child,
+    .hindi-meaning:last-of-type { margin-bottom: 0; }
+
+    /* Images gallery */
+    .images-section {
+      margin-top: 2.5rem;
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr 1fr;
+    }
+    .img-wrap {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid rgba(196, 92, 106, 0.4);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .img-wrap.full { grid-column: 1 / -1; }
+    .img-wrap img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+    .img-wrap.full img { height: 200px; }
+
+    /* Surprise toggles */
+    .surprises-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      color: var(--gold);
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .toggle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .toggle-btn {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      padding: 0.75rem 1rem;
+      background: rgba(196, 92, 106, 0.2);
+      border: 1px solid var(--rose);
+      color: var(--cream);
+      border-radius: 2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .toggle-btn:hover {
+      background: var(--rose);
+      transform: scale(1.02);
+    }
+    .toggle-btn.active {
+      background: var(--rose-deep);
+      border-color: var(--gold);
+      color: var(--cream);
+    }
+    .surprise-box {
+      margin-top: 1rem;
+      padding: 1.25rem;
+      background: rgba(45, 35, 38, 0.6);
+      border-radius: 12px;
+      border-left: 4px solid var(--gold);
+      display: none;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
+    }
+    .surprise-box.visible {
+      display: block;
+      opacity: 1;
+    }
+    .surprise-box h4 {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+      font-size: 1.15rem;
+    }
+    .surprise-box p, .surprise-box ul {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(253, 248, 245, 0.95);
+    }
+    .surprise-box ul { padding-left: 1.25rem; margin-top: 0.5rem; }
+    .surprise-box li { margin-bottom: 0.35rem; }
+    .confetti-wrap {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      animation: confettiFall 4s ease-out forwards;
+    }
+    @keyframes confettiFall {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -217,8 +355,67 @@
         <p class="line">I never want to stop making memories with you.</p>
       </div>
       <p class="sign-off">Happy Valentine's Day. With all my love.</p>
+
+      <!-- Hindi lines -->
+      <div class="hindi-section">
+        <h3>मेरे दिल से — From my heart</h3>
+        <p class="hindi-line">तुम मेरी दुनिया हो।</p>
+        <p class="hindi-meaning">You are my world.</p>
+        <p class="hindi-line">हर पल तुम्हारे साथ बिताना चाहता हूँ।</p>
+        <p class="hindi-meaning">I want to spend every moment with you.</p>
+        <p class="hindi-line">मैं तुमसे बहुत प्यार करता हूँ।</p>
+        <p class="hindi-meaning">I love you so much.</p>
+        <p class="hindi-line">तुम जहाँ हो, वहीं मेरा घर है।</p>
+        <p class="hindi-meaning">Wherever you are, that is my home.</p>
+      </div>
+
+      <!-- Pictures -->
+      <div class="images-section">
+        <div class="img-wrap">
+          <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&q=80" alt="Roses" loading="lazy">
+        </div>
+        <div class="img-wrap">
+          <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&q=80" alt="Love" loading="lazy">
+        </div>
+        <div class="img-wrap full">
+          <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=800&q=80" alt="Together" loading="lazy">
+        </div>
+      </div>
+
+      <!-- Surprise toggles -->
+      <h3 class="surprises-heading">🎁 Click for surprises</h3>
+      <div class="toggle-grid">
+        <button type="button" class="toggle-btn" data-surprise="1">Surprise 1</button>
+        <button type="button" class="toggle-btn" data-surprise="2">Surprise 2</button>
+        <button type="button" class="toggle-btn" data-surprise="3">Surprise 3</button>
+        <button type="button" class="toggle-btn" data-surprise="4">Surprise 4</button>
+      </div>
+      <div id="surprise1" class="surprise-box">
+        <h4>💕 A secret message</h4>
+        <p>You're the first thing I think about when I wake up and the last before I sleep. Thank you for being you.</p>
+      </div>
+      <div id="surprise2" class="surprise-box">
+        <h4>✨ Reasons I love you</h4>
+        <ul>
+          <li>Your smile</li>
+          <li>How you make every day better</li>
+          <li>Your laugh</li>
+          <li>That you chose me</li>
+          <li>Forever with you is all I want</li>
+        </ul>
+      </div>
+      <div id="surprise3" class="surprise-box">
+        <h4>🌹 Promise</h4>
+        <p>I promise to stand by you, to make you laugh when you're sad, and to love you more every single day. You're my always.</p>
+      </div>
+      <div id="surprise4" class="surprise-box">
+        <h4>💖 Confetti for you!</h4>
+        <p>You deserve all the celebration in the world. Happy Valentine's, my love! 🎉</p>
+      </div>
     </div>
   </main>
+
+  <div class="confetti-wrap" id="confettiWrap" aria-hidden="true"></div>
 
   <script>
     const cover = document.getElementById('cover');
@@ -231,6 +428,35 @@
 
     cover.addEventListener('click', openNote);
     cover.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openNote(); } });
+
+    // Surprise toggles
+    const colors = ['#c45c6a', '#c9a959', '#e8a0a8', '#a63d4a'];
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const id = this.getAttribute('data-surprise');
+        const box = document.getElementById('surprise' + id);
+        const wasActive = this.classList.contains('active');
+        document.querySelectorAll('.surprise-box').forEach(b => b.classList.remove('visible'));
+        document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+        if (!wasActive) {
+          box.classList.add('visible');
+          this.classList.add('active');
+          if (id === '4') {
+            const wrap = document.getElementById('confettiWrap');
+            wrap.innerHTML = '';
+            for (let i = 0; i < 50; i++) {
+              const c = document.createElement('div');
+              c.className = 'confetti';
+              c.style.left = Math.random() * 100 + '%';
+              c.style.background = colors[Math.floor(Math.random() * colors.length)];
+              c.style.animationDelay = Math.random() * 0.5 + 's';
+              wrap.appendChild(c);
+            }
+            setTimeout(() => { wrap.innerHTML = ''; }, 4500);
+          }
+        }
+      });
+    });
   </script>
 </body>
 </html>
