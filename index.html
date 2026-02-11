@@ -3,17 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For You — Valentine</title>
+  <title>For You — My Forever Valentine</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400&family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&family=Noto+Sans+Devanagari:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --rose: #c45c6a;
-      --rose-deep: #a63d4a;
-      --cream: #fdf8f5;
-      --ink: #2d2326;
-      --gold: #c9a959;
+      --color-burgundy: #8B2635;
+      --color-plum: #5D2E46;
+      --color-deep-purple: #2D1B2E;
+      --color-gold: #D4AF37;
+      --color-gold-light: #E5C97A;
+      --color-cream: #F5F1E8;
+      --color-white: #FFFFFF;
+      --color-dark: #0A0507;
+      
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 2rem;
+      --spacing-lg: 4rem;
+      --spacing-xl: 6rem;
+      
+      --border-radius-sm: 12px;
+      --border-radius-md: 20px;
+      --border-radius-lg: 32px;
+      
+      --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 
     * {
@@ -22,934 +38,698 @@
       box-sizing: border-box;
     }
 
-    body {
-      font-family: 'Outfit', sans-serif;
-      background: radial-gradient(circle at top, #3b202a 0%, #1a0f12 40%, #12090c 100%);
-      background-attachment: fixed;
-      min-height: 100vh;
-      color: var(--cream);
-      overflow-x: hidden;
+    html {
       scroll-behavior: smooth;
     }
 
-    .hearts {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
-    }
-    .hearts span {
-      position: absolute;
-      width: 12px;
-      height: 12px;
-      background: var(--rose);
-      opacity: 0.15;
-      border-radius: 50%;
-      animation: float 15s infinite ease-in-out;
-      filter: blur(1px);
-      box-shadow: 0 0 10px rgba(196, 92, 106, 0.5);
-    }
-    .hearts span:nth-child(1) { left: 10%; animation-delay: 0s; width: 14px; height: 14px; }
-    .hearts span:nth-child(2) { left: 25%; animation-delay: -3s; }
-    .hearts span:nth-child(3) { left: 45%; animation-delay: -6s; width: 16px; height: 16px; }
-    .hearts span:nth-child(4) { left: 65%; animation-delay: -2s; }
-    .hearts span:nth-child(5) { left: 85%; animation-delay: -8s; width: 13px; height: 13px; }
-    .hearts span:nth-child(6) { left: 35%; animation-delay: -4s; }
-    .hearts span:nth-child(7) { left: 75%; animation-delay: -10s; width: 15px; height: 15px; }
-    @keyframes float {
-      0%, 100% { transform: translateY(100vh) scale(0) rotate(0deg); opacity: 0; }
-      10% { opacity: 0.2; }
-      50% { transform: translateY(50vh) scale(1.2) rotate(180deg); }
-      90% { opacity: 0.08; }
-      100% { transform: translateY(-20vh) scale(1) rotate(360deg); opacity: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--color-dark);
+      color: var(--color-cream);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Generic screens */
-    .screen {
+    /* Background Layers */
+    .bg-layer {
       position: fixed;
       inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .bg-layer-1 {
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(139, 38, 53, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+        linear-gradient(135deg, #0A0507 0%, #1A0F12 25%, #2D1B2E 50%, #1A0F12 75%, #0A0507 100%);
+      background-attachment: fixed;
+    }
+    .bg-layer-2 {
+      background-image: 
+        url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1920&q=80'),
+        url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      background-blend-mode: overlay;
+      opacity: 0.08;
+      filter: blur(40px);
+      animation: bgShift 30s ease infinite;
+    }
+    @keyframes bgShift {
+      0%, 100% { transform: scale(1) translateX(0); }
+      50% { transform: scale(1.1) translateX(20px); }
+    }
+
+    /* Particles */
+    .particles {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--color-gold);
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: float 20s infinite ease-in-out;
+    }
+    .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .particle:nth-child(2) { left: 30%; animation-delay: -5s; }
+    .particle:nth-child(3) { left: 50%; animation-delay: -10s; }
+    .particle:nth-child(4) { left: 70%; animation-delay: -15s; }
+    .particle:nth-child(5) { left: 90%; animation-delay: -8s; }
+    @keyframes float {
+      0%, 100% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 0.3; }
+      90% { opacity: 0.1; }
+      100% { transform: translateY(-20vh) scale(1); opacity: 0; }
+    }
+
+    /* Container */
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-md);
+    }
+
+    /* Section Base */
+    .section {
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2.5rem 1.5rem;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(20px);
-      transition: opacity 0.7s ease, visibility 0.7s ease, transform 0.7s ease;
-      z-index: 1;
-    }
-    .screen.active {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .card {
-      max-width: 520px;
-      width: 100%;
-      background: rgba(18, 9, 12, 0.92);
-      border-radius: 18px;
-      padding: 2.25rem 2rem;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(201, 169, 89, 0.3);
+      padding: var(--spacing-xl) 0;
       position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(16px);
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at top, rgba(196, 92, 106, 0.15), transparent 60%);
-      opacity: 1;
-      pointer-events: none;
-    }
-    .card-inner {
-      position: relative;
-      z-index: 1;
     }
 
-    .label {
-      font-size: 0.8rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.9rem;
-      font-weight: 300;
-    }
-
-    h1, h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-    }
-
-    /* Intro screen */
-    #screen-intro h1 {
-      font-size: clamp(2.3rem, 6vw, 3.2rem);
-      text-align: center;
-      color: var(--cream);
-      margin-bottom: 0.4rem;
-      text-shadow: 0 0 30px rgba(196, 92, 106, 0.5), 0 0 60px rgba(201, 169, 89, 0.3);
-      animation: glow 3s ease-in-out infinite alternate;
-    }
-    #screen-intro p.lead {
-      font-size: 1.05rem;
-      text-align: center;
-      color: rgba(253, 248, 245, 0.8);
-      margin-bottom: 1.5rem;
-    }
-    .btn-row {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-top: 0.75rem;
-      flex-wrap: wrap;
-    }
-    .btn {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.95rem;
-      padding: 0.8rem 1.6rem;
-      border-radius: 999px;
-      border: 1px solid var(--rose);
-      background: rgba(196, 92, 106, 0.15);
-      color: var(--cream);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 4px 15px rgba(196, 92, 106, 0.3);
-    }
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(196, 92, 106, 0.4);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-      z-index: -1;
-    }
-    .btn:hover {
-      background: var(--rose);
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 8px 25px rgba(196, 92, 106, 0.6);
-    }
-    .btn:hover::before {
-      width: 280px;
-      height: 280px;
-    }
-    .btn:active {
-      transform: translateY(0) scale(1);
-      box-shadow: 0 3px 12px rgba(196, 92, 106, 0.4);
-    }
-    .btn--no {
-      border-color: rgba(253, 248, 245, 0.3);
-      background: transparent;
-    }
-    .btn--yes {
-      border-color: var(--gold);
-      background: linear-gradient(135deg, #c45c6a, #c9a959);
-    }
-
-    .message {
-      text-align: center;
-      font-size: 0.9rem;
-      color: rgba(253, 248, 245, 0.85);
-      margin-top: 0.9rem;
-      min-height: 1.4rem;
-    }
-    .message--error {
-      color: #ffb3c1;
-    }
-
-    /* Question screen */
-    #screen-questions h2 {
-      font-size: clamp(1.8rem, 4.5vw, 2.3rem);
-      text-align: center;
-      margin-bottom: 0.4rem;
-      color: var(--cream);
-      text-shadow: 0 0 20px rgba(201, 169, 89, 0.4);
-      animation: fadeInUp 0.8s ease both;
-    }
-    #screen-questions p.sub {
-      text-align: center;
-      font-size: 1rem;
-      color: rgba(253, 248, 245, 0.8);
-      margin-bottom: 1.5rem;
-    }
-
-    .progress-dots {
-      display: flex;
-      justify-content: center;
-      gap: 0.4rem;
-      margin-bottom: 1.2rem;
-    }
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(253, 248, 245, 0.25);
-      transition: all 0.3s ease;
-    }
-    .dot.active {
-      width: 22px;
-      background: linear-gradient(90deg, var(--rose), var(--gold));
-      box-shadow: 0 0 10px rgba(201, 169, 89, 0.7);
-    }
-
-    /* Note screen (final surprise) */
-    #screen-note {
-      align-items: flex-start;
-      padding: 3rem 1.5rem 4rem;
-      overflow-y: auto;
-    }
-    #screen-note::-webkit-scrollbar {
-      width: 8px;
-    }
-    #screen-note::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.2);
-      border-radius: 10px;
-    }
-    #screen-note::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, var(--rose), var(--gold));
-      border-radius: 10px;
-    }
-    #screen-note::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(180deg, var(--rose-deep), var(--rose));
-    }
-
-    .note-inner {
-      max-width: 520px;
-      width: 100%;
-    }
-
-    .note-inner h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 4vw, 2.2rem);
-      font-weight: 400;
-      color: var(--gold);
-      margin-bottom: 2rem;
-      text-align: center;
-      text-shadow: 0 0 20px rgba(201, 169, 89, 0.4);
-      animation: fadeInUp 1s ease 0.1s both;
-    }
-
-    .lines {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-    .line {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.15rem, 2.5vw, 1.4rem);
-      line-height: 1.6;
-      color: var(--cream);
-      padding: 1rem 1.25rem;
-      border-left: 3px solid var(--rose);
-      background: rgba(196, 92, 106, 0.08);
-      border-radius: 0 8px 8px 0;
-      opacity: 0;
-      animation: fadeInSlide 0.8s ease forwards;
-      transition: all 0.3s ease;
+    /* Glass Card */
+    .glass-card {
+      background: rgba(18, 9, 12, 0.7);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: var(--border-radius-md);
+      padding: var(--spacing-lg);
+      box-shadow: 
+        0 32px 80px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+        0 0 60px rgba(139, 38, 53, 0.2);
       position: relative;
       overflow: hidden;
     }
-    .line::before {
+    .glass-card::before {
       content: '';
       position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 0;
-      background: linear-gradient(90deg, rgba(196, 92, 106, 0.2), transparent);
-      transition: width 0.5s ease;
-    }
-    .line:hover {
-      transform: translateX(5px);
-      background: rgba(196, 92, 106, 0.15);
-      box-shadow: -5px 0 15px rgba(196, 92, 106, 0.3);
-    }
-    .line:hover::before {
-      width: 100%;
-    }
-    .line.italic {
-      font-style: italic;
-      color: rgba(253, 248, 245, 0.95);
-    }
-    .line:nth-child(1) { animation-delay: 0.2s; }
-    .line:nth-child(2) { animation-delay: 0.4s; }
-    .line:nth-child(3) { animation-delay: 0.6s; }
-    .line:nth-child(4) { animation-delay: 0.8s; }
-    .line:nth-child(5) { animation-delay: 1s; }
-    .line:nth-child(6) { animation-delay: 1.2s; }
-    .line:nth-child(7) { animation-delay: 1.4s; }
-    .line:nth-child(8) { animation-delay: 1.6s; }
-    .line:nth-child(9) { animation-delay: 1.8s; }
-    .line:nth-child(10) { animation-delay: 2s; }
-
-    .sign-off {
-      margin-top: 2.5rem;
-      text-align: right;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
-      color: var(--rose);
-      opacity: 0;
-      animation: fadeInSlide 0.8s ease 2.2s forwards;
-      text-shadow: 0 0 20px rgba(196, 92, 106, 0.4);
-      position: relative;
-    }
-    .sign-off::after {
-      content: '💕';
-      margin-left: 0.5rem;
-      animation: heartbeat 1.5s ease infinite;
-      display: inline-block;
-    }
-
-    /* Hindi section */
-    .hindi-section {
-      margin-top: 2.5rem;
-      padding: 1.75rem 1.25rem;
-      background: linear-gradient(135deg, rgba(196, 92, 106, 0.15) 0%, rgba(201, 169, 89, 0.1) 100%);
-      border-radius: 12px;
-      border: 1px solid rgba(196, 92, 106, 0.3);
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s ease;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    }
-    .hindi-section::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(201, 169, 89, 0.1) 0%, transparent 70%);
+      inset: -50%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
       animation: rotate 20s linear infinite;
       pointer-events: none;
     }
-    .hindi-section:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(196, 92, 106, 0.3);
-      border-color: rgba(196, 92, 106, 0.5);
-    }
-    .hindi-section h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      color: var(--gold);
-      margin-bottom: 1rem;
-      text-align: center;
-      letter-spacing: 0.1em;
+    .glass-card-content {
       position: relative;
       z-index: 1;
-      text-shadow: 0 0 15px rgba(201, 169, 89, 0.4);
     }
-    .hindi-line {
-      font-family: 'Noto Sans Devanagari', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--cream);
-      text-align: center;
+
+    /* Typography */
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+    h1 {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      margin-bottom: var(--spacing-md);
+      background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-gold-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+    }
+    h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--color-gold-light);
+      margin-bottom: var(--spacing-md);
+      text-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+    }
+    h3 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      color: var(--color-gold);
+      margin-bottom: var(--spacing-sm);
+    }
+    p {
+      font-size: clamp(1rem, 1.5vw, 1.125rem);
+      color: rgba(245, 241, 232, 0.9);
       line-height: 1.8;
-      margin-bottom: 0.5rem;
-      position: relative;
-      z-index: 1;
-      transition: transform 0.3s ease;
+      margin-bottom: var(--spacing-sm);
     }
-    .hindi-line:hover {
-      transform: scale(1.05);
-      text-shadow: 0 0 10px rgba(253, 248, 245, 0.5);
-    }
-    .hindi-meaning {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.9rem;
-      color: rgba(253, 248, 245, 0.8);
-      text-align: center;
-      font-style: italic;
-      margin-bottom: 1rem;
-      position: relative;
-      z-index: 1;
-      transition: color 0.3s ease;
-    }
-    .hindi-meaning:hover {
-      color: rgba(253, 248, 245, 1);
+    .lead {
+      font-size: clamp(1.25rem, 2vw, 1.5rem);
+      color: rgba(245, 241, 232, 0.85);
+      font-weight: 300;
+      line-height: 1.6;
     }
 
-    /* Images gallery */
-    .images-section {
-      margin-top: 2.5rem;
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: 1fr 1fr;
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: var(--spacing-xl) 0;
     }
-    .img-wrap {
-      border-radius: 12px;
-      overflow: hidden;
-      border: 2px solid rgba(196, 92, 106, 0.4);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-      position: relative;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    .hero-subtitle {
+      font-size: clamp(0.875rem, 1.5vw, 1rem);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      margin-bottom: var(--spacing-sm);
+      font-weight: 500;
+    }
+    .hero-cta {
+      margin-top: var(--spacing-lg);
+    }
+
+    /* Button */
+    .btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 1rem 2.5rem;
+      border-radius: 999px;
+      border: none;
       cursor: pointer;
+      transition: all 0.4s var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
-    .img-wrap::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(196, 92, 106, 0.2), rgba(201, 169, 89, 0.2));
+    .btn-primary {
+      background: linear-gradient(135deg, var(--color-burgundy) 0%, var(--color-plum) 100%);
+      color: var(--color-cream);
+      box-shadow: 
+        0 8px 24px rgba(139, 38, 53, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 12px 32px rgba(139, 38, 53, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+        0 0 40px rgba(212, 175, 55, 0.3);
+    }
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+    .btn-large {
+      font-size: 1.25rem;
+      padding: 1.5rem 3.5rem;
+    }
+
+    /* Timeline Section */
+    .timeline {
+      display: grid;
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-lg);
+    }
+    .timeline-item {
       opacity: 0;
-      transition: opacity 0.4s ease;
-      z-index: 1;
-      pointer-events: none;
+      transform: translateY(30px);
+      transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
     }
-    .img-wrap:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 15px 40px rgba(196, 92, 106, 0.5);
-      border-color: var(--rose);
-    }
-    .img-wrap:hover::before {
+    .timeline-item.visible {
       opacity: 1;
+      transform: translateY(0);
     }
-    .img-wrap.full { grid-column: 1 / -1; }
-    .img-wrap img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.6s ease;
+    .timeline-item h3 {
+      margin-bottom: var(--spacing-xs);
     }
-    .img-wrap:hover img {
-      transform: scale(1.1);
+    .timeline-date {
+      font-size: 0.875rem;
+      color: var(--color-gold);
+      margin-bottom: var(--spacing-xs);
+      font-weight: 500;
     }
-    .img-wrap.full img { height: 200px; }
 
-    /* Surprise toggles in note */
-    .surprises-heading {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
-      color: var(--gold);
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
-      text-align: center;
-      text-shadow: 0 0 20px rgba(201, 169, 89, 0.5);
-      animation: fadeInUp 0.8s ease both;
-    }
-    .toggle-grid {
+    /* Tech Love Section */
+    .tech-love {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 0.75rem;
-      margin-bottom: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-lg);
     }
-    .toggle-btn {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.9rem;
-      padding: 0.75rem 1rem;
-      background: rgba(196, 92, 106, 0.2);
-      border: 1px solid var(--rose);
-      color: var(--cream);
-      border-radius: 2rem;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(196, 92, 106, 0.2);
+    .tech-card {
+      background: rgba(45, 27, 46, 0.6);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: var(--border-radius-sm);
+      padding: var(--spacing-md);
+      transition: all 0.4s var(--transition-smooth);
     }
-    .toggle-btn::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(196, 92, 106, 0.4);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
+    .tech-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: 0 12px 32px rgba(139, 38, 53, 0.3);
     }
-    .toggle-btn:hover {
-      background: var(--rose);
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 8px 25px rgba(196, 92, 106, 0.5);
+    .tech-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      color: var(--color-gold);
+      margin-bottom: var(--spacing-xs);
+      opacity: 0.8;
     }
-    .toggle-btn:hover::before {
-      width: 300px;
-      height: 300px;
-    }
-    .toggle-btn:active {
-      transform: translateY(-1px) scale(1.02);
-    }
-    .toggle-btn.active {
-      background: var(--rose-deep);
-      border-color: var(--gold);
-      color: var(--cream);
-      box-shadow: 0 0 20px rgba(201, 169, 89, 0.6), 0 6px 20px rgba(196, 92, 106, 0.4);
-      animation: pulse 2s ease infinite;
+    .tech-text {
+      font-size: 1rem;
+      color: var(--color-cream);
+      font-style: italic;
     }
 
-    .surprise-box {
-      margin-top: 1rem;
-      padding: 1.25rem;
-      background: rgba(45, 35, 38, 0.6);
-      border-radius: 12px;
-      border-left: 4px solid var(--gold);
-      display: none;
+    /* Terminal Block */
+    .terminal {
+      background: rgba(10, 5, 7, 0.9);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: var(--border-radius-sm);
+      padding: var(--spacing-md);
+      margin-top: var(--spacing-lg);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      color: var(--color-gold-light);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+    .terminal-line {
+      margin-bottom: var(--spacing-xs);
       opacity: 0;
-      transform: translateY(-10px);
-      animation: surpriseReveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      position: relative;
-      overflow: hidden;
+      animation: typeIn 0.5s ease forwards;
     }
-    .surprise-box::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(201, 169, 89, 0.1), transparent);
-      animation: shine 2s ease infinite;
+    .terminal-line:nth-child(1) { animation-delay: 0.2s; }
+    .terminal-line:nth-child(2) { animation-delay: 0.6s; }
+    .terminal-line:nth-child(3) { animation-delay: 1s; }
+    .terminal-line:nth-child(4) { animation-delay: 1.4s; }
+    .terminal-prompt {
+      color: var(--color-gold);
     }
-    .surprise-box.visible {
-      display: block;
+    .terminal-success {
+      color: #4ade80;
     }
-    .surprise-box h4 {
-      font-family: 'Cormorant Garamond', serif;
-      color: var(--gold);
-      margin-bottom: 0.75rem;
-      font-size: 1.15rem;
-      text-shadow: 0 0 15px rgba(201, 169, 89, 0.5);
-      position: relative;
-      z-index: 1;
+    @keyframes typeIn {
+      to { opacity: 1; }
     }
-    .surprise-box p, .surprise-box ul {
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: rgba(253, 248, 245, 0.95);
-      position: relative;
-      z-index: 1;
+
+    /* Proposal Section */
+    .proposal {
+      text-align: center;
     }
-    .surprise-box ul { padding-left: 1.25rem; margin-top: 0.5rem; }
-    .surprise-box li { margin-bottom: 0.35rem; }
+    .proposal-question {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: var(--spacing-md);
+      animation: pulse 3s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.95; transform: scale(1.02); }
+    }
+
+    /* Hindi Text */
+    .hindi-text {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: clamp(1.25rem, 2vw, 1.5rem);
+      color: var(--color-cream);
+      font-weight: 600;
+      margin: var(--spacing-sm) 0;
+      line-height: 1.8;
+    }
+    .hindi-translation {
+      font-size: 1rem;
+      color: rgba(245, 241, 232, 0.7);
+      font-style: italic;
+      margin-bottom: var(--spacing-md);
+    }
+
+    /* Final Vow Section */
+    .vow-section {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .vow-letter {
+      background: rgba(18, 9, 12, 0.8);
+      border: 2px solid rgba(212, 175, 55, 0.3);
+      border-radius: var(--border-radius-md);
+      padding: var(--spacing-lg);
+      margin: var(--spacing-lg) 0;
+      text-align: left;
+      font-size: 1.125rem;
+      line-height: 1.9;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+    }
 
     /* Confetti */
-    .confetti-wrap {
+    .confetti-container {
       position: fixed;
       inset: 0;
       pointer-events: none;
+      z-index: 100;
       overflow: hidden;
-      z-index: 3;
     }
     .confetti {
       position: absolute;
       width: 10px;
       height: 10px;
+      background: var(--color-gold);
       border-radius: 2px;
       animation: confettiFall 4s ease-out forwards;
-      box-shadow: 0 0 6px currentColor;
     }
     @keyframes confettiFall {
-      0% { transform: translateY(-10vh) rotate(0deg) scale(0); opacity: 1; }
-      10% { transform: translateY(0vh) rotate(90deg) scale(1); }
-      100% { transform: translateY(110vh) rotate(720deg) scale(0.5); opacity: 0; }
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
     }
 
-    /* Animations & helpers */
-    @keyframes glow {
-      from { text-shadow: 0 0 30px rgba(196, 92, 106, 0.5), 0 0 60px rgba(201, 169, 89, 0.3); }
-      to { text-shadow: 0 0 40px rgba(196, 92, 106, 0.8), 0 0 80px rgba(201, 169, 89, 0.5), 0 0 100px rgba(196, 92, 106, 0.3); }
+    /* Final Message Overlay */
+    .final-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 5, 7, 0.95);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.6s var(--transition-smooth);
+      backdrop-filter: blur(10px);
     }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .final-overlay.visible {
+      opacity: 1;
+      visibility: visible;
     }
-    @keyframes fadeInSlide {
-      from { opacity: 0; transform: translateX(-20px); }
-      to { opacity: 1; transform: translateX(0); }
+    .final-message {
+      background: linear-gradient(135deg, rgba(139, 38, 53, 0.95), rgba(93, 46, 70, 0.95));
+      border: 2px solid var(--color-gold);
+      border-radius: var(--border-radius-md);
+      padding: var(--spacing-lg);
+      max-width: 600px;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+      transform: scale(0.8);
+      transition: transform 0.6s var(--transition-bounce);
     }
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      25% { transform: scale(1.2); }
-      50% { transform: scale(1); }
+    .final-overlay.visible .final-message {
+      transform: scale(1);
     }
+    .final-message h2 {
+      margin-bottom: var(--spacing-md);
+    }
+    .final-message p {
+      font-size: 1.25rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    /* Scroll Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 var(--spacing-sm);
+      }
+      .section {
+        padding: var(--spacing-lg) 0;
+      }
+      .glass-card {
+        padding: var(--spacing-md);
+      }
+      .tech-love {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @keyframes rotate {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 20px rgba(201, 169, 89, 0.6), 0 6px 20px rgba(196, 92, 106, 0.4); }
-      50% { box-shadow: 0 0 30px rgba(201, 169, 89, 0.8), 0 8px 30px rgba(196, 92, 106, 0.6); }
-    }
-    @keyframes surpriseReveal {
-      from { opacity: 0; transform: translateY(-10px) scale(0.95); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    @keyframes shine {
-      0% { left: -100%; }
-      100% { left: 100%; }
-    }
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-6px); }
-      50% { transform: translateX(6px); }
-      75% { transform: translateX(-4px); }
-    }
-    .shake {
-      animation: shake 0.4s ease;
-    }
-
-    @media (max-width: 480px) {
-      .card {
-        padding: 1.8rem 1.4rem;
-      }
-      .btn-row {
-        flex-direction: column;
-      }
-    }
   </style>
 </head>
 <body>
-  <div class="hearts" aria-hidden="true">
-    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  <div class="bg-layer bg-layer-1"></div>
+  <div class="bg-layer bg-layer-2"></div>
+  
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
   </div>
 
-  <!-- Screen 1: Will you be my Valentine? -->
-  <section id="screen-intro" class="screen active">
-    <div class="card" id="intro-card">
-      <div class="card-inner">
-        <p class="label">Valentine's Day</p>
-        <h1>Will you be my Valentine?</h1>
-        <p class="lead">Kya tum meri Valentine banogi? 💘</p>
-        <div class="btn-row">
-          <button type="button" class="btn btn--yes" id="introYes">YES</button>
-          <button type="button" class="btn btn--no" id="introNo">NO</button>
+  <!-- Hero Section -->
+  <section class="section hero">
+    <div class="container">
+      <div class="glass-card">
+        <div class="glass-card-content">
+          <p class="hero-subtitle">Valentine's Day 2024</p>
+          <h1>Will you be my forever Valentine?</h1>
+          <p class="lead">Kya tum meri har Valentine's Day ki partner banogi?</p>
+          <div class="hero-cta">
+            <button class="btn btn-primary btn-large" onclick="scrollToNext()">Begin Our Story</button>
+          </div>
         </div>
-        <p class="message" id="introMessage"></p>
       </div>
     </div>
   </section>
 
-  <!-- Screen 2: Series of proposal questions -->
-  <section id="screen-questions" class="screen">
-    <div class="card" id="question-card">
-      <div class="card-inner">
-        <p class="label">Level 2 · Serious questions</p>
-        <h2 id="questionMain"></h2>
-        <p class="sub" id="questionSub"></p>
-
-        <div class="progress-dots" id="progressDots"></div>
-
-        <div class="btn-row">
-          <button type="button" class="btn btn--yes" id="qYes">YES</button>
-          <button type="button" class="btn btn--no" id="qNo">NO</button>
+  <!-- Story Timeline -->
+  <section class="section" id="story">
+    <div class="container">
+      <div class="glass-card fade-in">
+        <div class="glass-card-content">
+          <h2>How Our Story Began</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date">The First Commit</div>
+              <h3>When I First Saw You</h3>
+              <p>That moment when our eyes met, I knew my code had a bug - my heart started running an infinite loop. You were the exception I never expected, the feature I didn't know I needed.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">The Merge Request</div>
+              <h3>When We Became Us</h3>
+              <p>My favorite merge request was us. Two separate branches of life, coming together to create something beautiful. No conflicts, no merge errors - just perfect compatibility.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">Continuous Deployment</div>
+              <h3>Every Day Since</h3>
+              <p>Every morning I deploy a new version of myself - better, improved, more in love with you. You're my CI/CD pipeline, making sure I'm always the best version.</p>
+            </div>
+          </div>
         </div>
-        <p class="message" id="questionMessage"></p>
       </div>
     </div>
   </section>
 
-  <!-- Screen 3: Final love note + Hindi + pictures + surprises -->
-  <section id="screen-note" class="screen">
-    <div class="note-inner">
-      <p class="label" style="text-align:center;">Final Surprise</p>
-      <h2>To the one I love</h2>
-
-      <div class="lines">
-        <p class="line">I vow to fiercely love you in all your forms, now and forever.</p>
-        <p class="line">You are the song that my heart loves to sing.</p>
-        <p class="line">You don't love someone because they're perfect — you love them in spite of the fact that they're not.</p>
-        <p class="line italic">Whenever I'm with you, wherever we are, I'm home.</p>
-        <p class="line">Never above you. Never below you. Always beside you.</p>
-        <p class="line">Every love story is beautiful, but ours is my favorite.</p>
-        <p class="line italic">And if the stars should ever die, we'll make our own light, you and I.</p>
-        <p class="line">I look at every day with you as a gift.</p>
-        <p class="line">You may hold my hand for a while, but you hold my heart forever.</p>
-        <p class="line">I never want to stop making memories with you.</p>
-      </div>
-
-      <p class="sign-off">Happy Valentine's Day. With all my love.</p>
-
-      <!-- Hindi lines -->
-      <div class="hindi-section">
-        <h3>मेरे दिल से — From my heart</h3>
-        <p class="hindi-line">तुम मेरी दुनिया हो।</p>
-        <p class="hindi-meaning">You are my world.</p>
-        <p class="hindi-line">हर पल तुम्हारे साथ बिताना चाहता हूँ।</p>
-        <p class="hindi-meaning">I want to spend every moment with you.</p>
-        <p class="hindi-line">मैं तुमसे बहुत प्यार करता हूँ।</p>
-        <p class="hindi-meaning">I love you so much.</p>
-        <p class="hindi-line">तुम जहाँ हो, वहीं मेरा घर है।</p>
-        <p class="hindi-meaning">Wherever you are, that is my home.</p>
-      </div>
-
-      <!-- Pictures -->
-      <div class="images-section">
-        <div class="img-wrap">
-          <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&q=80" alt="Roses" loading="lazy">
+  <!-- Tech Love Section -->
+  <section class="section" id="tech-love">
+    <div class="container">
+      <div class="glass-card fade-in">
+        <div class="glass-card-content">
+          <h2>My Code, My Heart</h2>
+          <div class="tech-love">
+            <div class="tech-card">
+              <div class="tech-code">uptime: 100%</div>
+              <div class="tech-text">My heart's uptime has been 100% since I met you. No downtime, no crashes.</div>
+            </div>
+            <div class="tech-card">
+              <div class="tech-code">status: "in_love"</div>
+              <div class="tech-text">Tum meri safest place ho. With you, I'm always in a secure, encrypted connection.</div>
+            </div>
+            <div class="tech-card">
+              <div class="tech-code">dependency: "you"</div>
+              <div class="tech-text">Tumhare bina har system incomplete lagta hai. You're my most critical dependency.</div>
+            </div>
+            <div class="tech-card">
+              <div class="tech-code">commit: "forever"</div>
+              <div class="tech-text">Every commit message says the same thing: "I love you more than yesterday."</div>
+            </div>
+          </div>
         </div>
-        <div class="img-wrap">
-          <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&q=80" alt="Love" loading="lazy">
-        </div>
-        <div class="img-wrap full">
-          <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=800&q=80" alt="Together" loading="lazy">
-        </div>
-      </div>
-
-      <!-- Surprise toggles -->
-      <h3 class="surprises-heading">🎁 Click for surprises</h3>
-      <div class="toggle-grid">
-        <button type="button" class="toggle-btn" data-surprise="1">Surprise 1</button>
-        <button type="button" class="toggle-btn" data-surprise="2">Surprise 2</button>
-        <button type="button" class="toggle-btn" data-surprise="3">Surprise 3</button>
-        <button type="button" class="toggle-btn" data-surprise="4">Surprise 4</button>
-      </div>
-
-      <div id="surprise1" class="surprise-box">
-        <h4>💕 A secret message</h4>
-        <p>You're the first thing I think about when I wake up and the last before I sleep. Thank you for being you.</p>
-      </div>
-      <div id="surprise2" class="surprise-box">
-        <h4>✨ Reasons I love you</h4>
-        <ul>
-          <li>Your smile</li>
-          <li>How you make every day better</li>
-          <li>Your laugh</li>
-          <li>That you chose me</li>
-          <li>Forever with you is all I want</li>
-        </ul>
-      </div>
-      <div id="surprise3" class="surprise-box">
-        <h4>🌹 Promise</h4>
-        <p>I promise to stand by you, to make you laugh when you're sad, and to love you more every single day. You're my always.</p>
-      </div>
-      <div id="surprise4" class="surprise-box">
-        <h4>💖 Confetti for you!</h4>
-        <p>You deserve all the celebration in the world. Happy Valentine's, my love! 🎉</p>
       </div>
     </div>
   </section>
 
-  <div class="confetti-wrap" id="confettiWrap" aria-hidden="true"></div>
+  <!-- Hindi Love Section -->
+  <section class="section" id="hindi-love">
+    <div class="container">
+      <div class="glass-card fade-in">
+        <div class="glass-card-content" style="text-align: center;">
+          <h2>मेरे दिल की बात</h2>
+          <p class="hindi-text">तुम मेरी दुनिया हो।</p>
+          <p class="hindi-translation">You are my world.</p>
+          
+          <p class="hindi-text">हर पल तुम्हारे साथ बिताना चाहता हूँ।</p>
+          <p class="hindi-translation">I want to spend every moment with you.</p>
+          
+          <p class="hindi-text">मैं तुमसे बहुत प्यार करता हूँ।</p>
+          <p class="hindi-translation">I love you so much.</p>
+          
+          <p class="hindi-text">तुम जहाँ हो, वहीं मेरा घर है।</p>
+          <p class="hindi-translation">Wherever you are, that is my home.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proposal Section -->
+  <section class="section proposal" id="proposal">
+    <div class="container">
+      <div class="glass-card fade-in">
+        <div class="glass-card-content">
+          <h2>The Question</h2>
+          <div class="proposal-question">
+            Will you marry me again,<br>
+            every single day?
+          </div>
+          <p class="lead">Kya tum meri har agle janam ki bhi wife banogi?</p>
+          <p style="margin-top: var(--spacing-md);">Will you keep choosing this crazy engineer forever?</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Terminal Section -->
+  <section class="section" id="terminal">
+    <div class="container">
+      <div class="glass-card fade-in">
+        <div class="glass-card-content">
+          <h2>System Status</h2>
+          <div class="terminal">
+            <div class="terminal-line">
+              <span class="terminal-prompt">$</span> deploying lifetime_commit...
+            </div>
+            <div class="terminal-line">
+              <span class="terminal-prompt">$</span> status: <span class="terminal-success">success</span>
+            </div>
+            <div class="terminal-line">
+              <span class="terminal-prompt">$</span> partner: [Your Name]
+            </div>
+            <div class="terminal-line">
+              <span class="terminal-prompt">$</span> love_level: ∞
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final Vow Section -->
+  <section class="section vow-section" id="vow">
+    <div class="container">
+      <div class="glass-card fade-in">
+        <div class="glass-card-content">
+          <h2>My Promise to You</h2>
+          <div class="vow-letter">
+            <p>My Dearest Love,</p>
+            <p>As a software engineer, I've spent years debugging code, optimizing systems, and building solutions. But the greatest algorithm I've ever written is the one that led me to you.</p>
+            <p>I promise to be your most reliable dependency, your constant uptime, your forever commit. I promise to love you like I code - with precision, dedication, and endless iterations of improvement.</p>
+            <p>Tum meri zindagi ki sabse important feature ho. Without you, my system is incomplete.</p>
+            <p>Will you be my forever Valentine? Will you say yes to a lifetime of love, laughter, and late-night coding sessions together?</p>
+            <p style="margin-top: var(--spacing-md); text-align: right;">Forever yours,<br>Your Engineer 💻❤️</p>
+          </div>
+          <button class="btn btn-primary btn-large" id="finalYes">YES, FOREVER</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Confetti Container -->
+  <div class="confetti-container" id="confetti"></div>
+
+  <!-- Final Message Overlay -->
+  <div class="final-overlay" id="finalOverlay">
+    <div class="final-message">
+      <h2>💕 Are jldi aao!</h2>
+      <p>Warna late ho jayega... 😄</p>
+      <p style="font-size: 1rem; margin-top: var(--spacing-md);">
+        I'm waiting with a ring and a lifetime of love.<br>
+        Come quickly, my forever Valentine. ❤️
+      </p>
+      <p style="font-size: 0.875rem; margin-top: var(--spacing-sm); opacity: 0.8;">
+        (Click anywhere to close)
+      </p>
+    </div>
+  </div>
 
   <script>
-    const screenIntro = document.getElementById('screen-intro');
-    const screenQuestions = document.getElementById('screen-questions');
-    const screenNote = document.getElementById('screen-note');
-
-    const introCard = document.getElementById('intro-card');
-    const introYes = document.getElementById('introYes');
-    const introNo = document.getElementById('introNo');
-    const introMessage = document.getElementById('introMessage');
-
-    const questionCard = document.getElementById('question-card');
-    const questionMain = document.getElementById('questionMain');
-    const questionSub = document.getElementById('questionSub');
-    const qYes = document.getElementById('qYes');
-    const qNo = document.getElementById('qNo');
-    const questionMessage = document.getElementById('questionMessage');
-    const progressDots = document.getElementById('progressDots');
-
-    const confettiWrap = document.getElementById('confettiWrap');
-    const confettiColors = ['#c45c6a', '#c9a959', '#e8a0a8', '#a63d4a'];
-
-    const questions = [
-      {
-        main: 'Will you marry me?',
-        sub: 'Kab se yahi soch raha hoon... 💍'
-      },
-      {
-        main: 'Mere ghar ki bahu banoge?',
-        sub: 'Mummy ko kya bolूँ? 😌'
-      },
-      {
-        main: 'Mere baccho ki mummy banoge?',
-        sub: 'Chhote chhote versions of you + me. 🥺'
-      },
-      {
-        main: 'Har subah meri muskaan ka reason banogi?',
-        sub: 'Tum ho toh sab kuch hai. ☀️'
-      },
-      {
-        main: 'Har raat meri goodnight kiss ka intezaar karogi?',
-        sub: 'Sirf meri wali. 🌙'
-      },
-      {
-        main: 'Kabhi mera haath nahi chhodoogi?',
-        sub: 'Jo bhi ho, saath mein rahenge. 🤝'
-      },
-      {
-        main: 'Meri life partner, meri best friend, sab kuch banogi?',
-        sub: 'Ek hi aadmi mein sab kuch manage karegi? 😜'
-      },
-      {
-        main: 'Hamesha, sirf meri hi rahoogi?',
-        sub: 'Promise? Pinky promise? 💗'
-      }
-    ];
-
-    let currentQuestion = 0;
-
-    function showScreen(which) {
-      [screenIntro, screenQuestions, screenNote].forEach(s => s.classList.remove('active'));
-      if (which === 'intro') screenIntro.classList.add('active');
-      if (which === 'questions') screenQuestions.classList.add('active');
-      if (which === 'note') screenNote.classList.add('active');
+    // Scroll to next section
+    function scrollToNext() {
+      document.getElementById('story').scrollIntoView({ behavior: 'smooth' });
     }
 
-    function buildProgressDots() {
-      progressDots.innerHTML = '';
-      questions.forEach((_, index) => {
-        const dot = document.createElement('span');
-        dot.className = 'dot';
-        if (index === 0) dot.classList.add('active');
-        progressDots.appendChild(dot);
-      });
-    }
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
 
-    function renderQuestion() {
-      const q = questions[currentQuestion];
-      questionMain.textContent = q.main;
-      questionSub.textContent = q.sub;
-      questionMessage.textContent = '';
-      const dots = progressDots.querySelectorAll('.dot');
-      dots.forEach((d, i) => {
-        d.classList.toggle('active', i === currentQuestion);
-      });
-    }
-
-    function shake(el) {
-      el.classList.remove('shake');
-      void el.offsetWidth; // trigger reflow
-      el.classList.add('shake');
-      setTimeout(() => el.classList.remove('shake'), 450);
-    }
-
-    function launchConfetti(count, durationMs) {
-      confettiWrap.innerHTML = '';
-      for (let i = 0; i < count; i++) {
-        const c = document.createElement('div');
-        c.className = 'confetti';
-        c.style.left = Math.random() * 100 + '%';
-        c.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
-        c.style.animationDelay = (Math.random() * 0.8) + 's';
-        const size = Math.random() * 8 + 6;
-        c.style.width = size + 'px';
-        c.style.height = size + 'px';
-        confettiWrap.appendChild(c);
-      }
-      setTimeout(() => { confettiWrap.innerHTML = ''; }, durationMs);
-    }
-
-    // Intro actions
-    introYes.addEventListener('click', () => {
-      introMessage.textContent = '';
-      currentQuestion = 0;
-      buildProgressDots();
-      renderQuestion();
-      showScreen('questions');
-    });
-
-    introNo.addEventListener('click', () => {
-      introMessage.textContent = 'Galat answer 😜. Tumhe sirf YES wala button use karne ki permission hai.';
-      introMessage.classList.add('message--error');
-      shake(introCard);
-    });
-
-    // Question YES / NO
-    qYes.addEventListener('click', () => {
-      questionMessage.textContent = 'I knew you would say YES. 💖';
-      if (currentQuestion < questions.length - 1) {
-        setTimeout(() => {
-          currentQuestion++;
-          renderQuestion();
-        }, 700);
-      } else {
-        // Last question YES -> big celebration + final note
-        launchConfetti(120, 6000);
-        questionMessage.textContent = 'Bas, ab tum officially meri ho. Final surprise aa raha hai...';
-        setTimeout(() => {
-          showScreen('note');
-          window.scrollTo(0, 0);
-        }, 1800);
-      }
-    });
-
-    qNo.addEventListener('click', () => {
-      questionMessage.textContent = 'Yeh option tumhare liye disabled hai 😝. Please try YES.';
-      questionMessage.classList.add('message--error');
-      shake(questionCard);
-    });
-
-    // Surprise toggle buttons in note screen
-    const toggleButtons = document.querySelectorAll('.toggle-btn');
-    toggleButtons.forEach(btn => {
-      btn.addEventListener('click', function () {
-        const id = this.getAttribute('data-surprise');
-        const box = document.getElementById('surprise' + id);
-        const wasActive = this.classList.contains('active');
-
-        document.querySelectorAll('.surprise-box').forEach(b => b.classList.remove('visible'));
-        toggleButtons.forEach(b => b.classList.remove('active'));
-
-        if (!wasActive) {
-          box.classList.add('visible');
-          this.classList.add('active');
-
-          // Extra confetti on Surprise 4
-          if (id === '4') {
-            launchConfetti(80, 5000);
-          }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
         }
       });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in, .timeline-item').forEach(el => {
+      observer.observe(el);
     });
 
-    // Start on intro screen
-    showScreen('intro');
+    // Final YES button
+    const finalYesBtn = document.getElementById('finalYes');
+    const confettiContainer = document.getElementById('confetti');
+    const finalOverlay = document.getElementById('finalOverlay');
+
+    function createConfetti() {
+      const colors = ['#D4AF37', '#8B2635', '#E5C97A', '#5D2E46'];
+      for (let i = 0; i < 150; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 2 + 's';
+        confetti.style.width = (Math.random() * 10 + 8) + 'px';
+        confetti.style.height = (Math.random() * 10 + 8) + 'px';
+        confettiContainer.appendChild(confetti);
+      }
+      setTimeout(() => {
+        confettiContainer.innerHTML = '';
+      }, 5000);
+    }
+
+    finalYesBtn.addEventListener('click', () => {
+      createConfetti();
+      setTimeout(() => {
+        finalOverlay.classList.add('visible');
+      }, 500);
+    });
+
+    finalOverlay.addEventListener('click', () => {
+      finalOverlay.classList.remove('visible');
+    });
+
+    // Smooth scroll on load
+    window.addEventListener('load', () => {
+      document.body.style.opacity = '1';
+    });
   </script>
 </body>
 </html>
